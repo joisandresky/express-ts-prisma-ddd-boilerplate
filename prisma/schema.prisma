@@ -15,16 +15,17 @@ datasource db {
 
 model Post {
   id        String  @id
-  title     String
+  title     String  @db.VarChar(255)
   body      String
   published Boolean
   author    User?   @relation(fields: [authorId], references: [id])
-  authorId  String
+  authorId  String  @db.VarChar(100)
 }
 
 model User {
-  id    String @id
-  name  String
-  email String
-  posts Post[]
+  id       String @id
+  name     String @db.VarChar(100)
+  email    String @db.VarChar(100)
+  password String @db.VarChar(100)
+  posts    Post[]
 }

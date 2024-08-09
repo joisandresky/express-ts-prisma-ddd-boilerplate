@@ -10,15 +10,21 @@ export const error_middlewre = async (
 ) => {
   if (error instanceof ZodError) {
     res.status(400).json({
-      errors: `Validation errors: ${JSON.stringify(error)}`,
+      errors: error,
+      message: "Validation Error!",
+      success: false,
     });
   } else if (error instanceof ResponseError) {
     res.status(error.status).json({
-      errors: error.message,
+      message: error.message,
+      errors: error.error_detail ?? undefined,
+      success: false,
     });
   } else {
     res.status(500).json({
       errors: error.message,
+      message: "Internal Server Error!",
+      success: false,
     });
   }
 };

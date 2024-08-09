@@ -2,6 +2,15 @@
 
 This is a boilerplate for Express + TypeScript + Prisma. also we are implementing DDD (Domain-Driven Design) with Prisma but we are ignoring Domain/Models since Prisma already have it.
 
+## TODO
+
+- [x] User Registration API
+- [x] User Login API
+- [x] Auth Middleware
+- [x] Redis Cache
+- [x] JWT Auth
+- [ ] Get Current User / Authenticated User
+
 ## Dependencies
 
 `npm install`
@@ -14,13 +23,13 @@ This is a boilerplate for Express + TypeScript + Prisma. also we are implementin
 
 `npm run dev`
 
-## Prisma
-
-`npx prisma generate`
-
 ## Prisma Migration
 
 `npx prisma migrate dev`
+
+## Prisma
+
+`npx prisma generate`
 
 ## Run Completely
 
