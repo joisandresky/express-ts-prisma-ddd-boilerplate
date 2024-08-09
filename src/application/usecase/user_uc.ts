@@ -52,10 +52,27 @@ export class UserUsecase {
       throw new ResponseError(401, "your credentials are wrong");
     }
 
-    const token = create_token(user.id, config.secret!, 3600);
+    // check if current user already have access token
+    // return old token instead
+    const token_key = `USER_TOKEN_${user.id}`;
+    const existing_token = await redis_client.get(token_key);
+    if (existing_token) {
+      return existing_token;
+    }
 
-    await redis_client.set(`USER_TOKEN_${user.id}`, token, "EX", 3600);
+    // token will have 7 days expiration
+    // user data will only have 1 hour expiration so it will refresh new user data if expired via auth mw
+    const in_a_week = 60 * 60 * 24 * 7;
+    const token = create_token(user.id, config.secret!, in_a_week);
+
+    await redis_client.set(`USER_TOKEN_${user.id}`, token, "EX", in_a_week);
+    await redis_client.set(`USER_${user.id}`, JSON.stringify(user), "EX", 3600);
 
     return token;
+  }
+
+  async logout(id: string) {
+    await redis_client.del(`USER_TOKEN_${id}`);
+    await redis_client.del(`USER_${id}`);
   }
 }

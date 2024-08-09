@@ -11,7 +11,7 @@ export const auth_middleware = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const token = req.get("Authorization");
+  let token = req.get("Authorization");
 
   if (!token) {
     return res
@@ -22,6 +22,8 @@ export const auth_middleware = async (
       })
       .end();
   }
+
+  token = token.replace("Bearer ", "");
 
   const payload = verify_token(token, config.secret!);
 

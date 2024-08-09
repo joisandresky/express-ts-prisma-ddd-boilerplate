@@ -1,6 +1,11 @@
 import type { NextFunction, Request, Response } from "express";
 import { UserUsecase } from "../../application/usecase/user_uc";
-import { LoginRequest, RegisterUserRequest } from "../../domain/dto/user_dto";
+import {
+  fromUserToUserInfo,
+  LoginRequest,
+  RegisterUserRequest,
+} from "../../domain/dto/user_dto";
+import { WithUserRequest } from "../../domain/request/custom-express";
 
 export class UserHandler {
   constructor(private uc: UserUsecase) {}
@@ -27,6 +32,29 @@ export class UserHandler {
       res.json({
         success: true,
         data: token,
+      });
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  me = async (req: WithUserRequest, res: Response, next: NextFunction) => {
+    try {
+      res.json({
+        success: true,
+        data: fromUserToUserInfo(req.user!),
+      });
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  logout = async (req: WithUserRequest, res: Response, next: NextFunction) => {
+    try {
+      await this.uc.logout(req.user!.id);
+
+      res.json({
+        success: true,
       });
     } catch (err) {
       next(err);

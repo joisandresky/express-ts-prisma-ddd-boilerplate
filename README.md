@@ -7,9 +7,11 @@ This is a boilerplate for Express + TypeScript + Prisma. also we are implementin
 - [x] User Registration API
 - [x] User Login API
 - [x] Auth Middleware
+- [x] Get Current User / Authenticated User
+- [x] Logout Authenticated User
 - [x] Redis Cache
 - [x] JWT Auth
-- [ ] Get Current User / Authenticated User
+- [x] Reset Prisma Migration so it will Clean
 
 ## Dependencies
 
