@@ -21,3 +21,17 @@ This is a boilerplate for Express + TypeScript + Prisma. also we are implementin
 ## Prisma Migration
 
 `npx prisma migrate dev`
+
+## Run Completely
+
+```shell
+npm install
+
+npx prisma migrate dev
+
+npx prisma generate
+
+npm run build
+
+npm run start
+```
