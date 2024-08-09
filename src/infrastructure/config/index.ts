@@ -5,6 +5,7 @@ dotenv.config();
 export const config = {
   app: app_config,
   secret: process.env.SECRET_KEY,
+  redis_url: process.env.REDIS_URL,
 };
 
 if (!config.secret) {

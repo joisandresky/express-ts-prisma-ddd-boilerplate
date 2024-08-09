@@ -1,4 +1,5 @@
 import { Redis } from "ioredis";
+import { config } from "../config";
 
 // will use default value with localhost:6379
 // or use can use this one to set it up
@@ -10,5 +11,6 @@ import { Redis } from "ioredis";
 //   password: "my-top-secret",
 //   db: 0, // Defaults to 0
 // });
+//
 
-export const redis_client = new Redis();
+export const redis_client = new Redis(config.redis_url!);
