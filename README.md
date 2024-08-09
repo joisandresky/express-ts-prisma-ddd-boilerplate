@@ -12,6 +12,9 @@ This is a boilerplate for Express + TypeScript + Prisma. also we are implementin
 - [x] Redis Cache
 - [x] JWT Auth
 - [x] Reset Prisma Migration so it will Clean
+- [ ] Dockerfile
+- [ ] Prometheus Metrics Setup
+- [ ] Swagger Documentation
 
 ## Dependencies
 
